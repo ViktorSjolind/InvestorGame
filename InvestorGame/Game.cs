@@ -1,18 +1,21 @@
-﻿using Microsoft.Xna.Framework;
+﻿using InvestorGame.Models;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace InvestorGame
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class Game : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        List<Lot> HouseList; 
         
-        public Game1()
+        public Game()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -28,6 +31,13 @@ namespace InvestorGame
         {
             // TODO: Add your initialization logic here
 
+            HouseList = new List<Lot>();
+            for(int i = 0; i < 1; i++)
+            {
+                Lot house = new Lot();
+                house.Initialize(graphics.GraphicsDevice, Player.AI);
+                HouseList.Add(house);
+            }
             base.Initialize();
         }
 
@@ -75,9 +85,16 @@ namespace InvestorGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            spriteBatch.Begin();
             // TODO: Add your drawing code here
-
+            foreach(Lot house in HouseList)
+            {
+                house.Draw(spriteBatch);
+            }
+            spriteBatch.End();
             base.Draw(gameTime);
+
+           
         }
     }
 }
