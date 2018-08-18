@@ -14,9 +14,11 @@ namespace InvestorGame.Utilities
         public Texture2D GridTexture;
         public int Width;
         public int Height;
+        private GraphicsDevice Graphics;
 
         public void Initialize(GraphicsDevice graphicsDevice)
         {
+            Graphics = graphicsDevice;
             GridTexture = new Texture2D(graphicsDevice, 1, 1);
             GridTexture.SetData(new Color[] { OwnColors.Red });
             Width = graphicsDevice.Viewport.Width;
@@ -29,12 +31,37 @@ namespace InvestorGame.Utilities
             DrawGrid(spriteBatch);            
         }
 
+        public List<Lot> CreateLots()
+        {
+            List<Lot> lots = new List<Lot>();
+
+            int gridSize = 50;
+            int columns = 24;
+            int rows = 12;
+            int runs = 0;
+
+            for (float x = -columns; x < columns; x++)
+            {
+                for (float y = -rows; y < rows; y++)
+                {
+                    if (x % 3 == 0 && y % 3 == 0 && x > -columns+1 && x < columns/2 && y >= -rows/2 && y < rows/2)
+                    {
+                        Lot lot = new Lot();
+                        lot.Initialize(Graphics, new Vector2((int)(Width / 2 + x * gridSize), (int)(Height / 2 + y * gridSize)));
+                        lots.Add(lot);
+
+                    }
+                }                
+            }
+            return lots;
+        }
+
         private void DrawGrid(SpriteBatch spriteBatch)
         {
-            int gridSize = 100;
+            int gridSize = 50;
             Rectangle rectangle;
-            int columns = 12;
-            int rows = 6;
+            int columns = 24;
+            int rows = 12;
 
             for (float x = -columns; x < columns; x++)
             {

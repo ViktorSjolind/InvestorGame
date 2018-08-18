@@ -14,7 +14,7 @@ namespace InvestorGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        List<Lot> HouseList;
+        List<Lot> Lots;
         LevelGenerator levelGenerator;
         public Game()
         {
@@ -34,15 +34,10 @@ namespace InvestorGame
         {
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
-            HouseList = new List<Lot>();
-            for(int i = 0; i < 1; i++)
-            {
-                Lot house = new Lot();
-                house.Initialize(graphics.GraphicsDevice, new Vector2(300,300));
-                HouseList.Add(house);
-            }
+            Lots = new List<Lot>();
             levelGenerator = new LevelGenerator();
             levelGenerator.Initialize(graphics.GraphicsDevice);
+            Lots = levelGenerator.CreateLots();
             base.Initialize();
         }
 
@@ -92,9 +87,9 @@ namespace InvestorGame
 
             spriteBatch.Begin();
             // TODO: Add your drawing code here
-            foreach(Lot house in HouseList)
+            foreach(Lot lot in Lots)
             {
-                house.Draw(spriteBatch);
+                lot.Draw(spriteBatch);
             }
             levelGenerator.Draw(spriteBatch);
 
