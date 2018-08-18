@@ -1,4 +1,5 @@
 ﻿using InvestorGame.Models;
+using InvestorGame.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,8 +14,8 @@ namespace InvestorGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        List<Lot> HouseList; 
-        
+        List<Lot> HouseList;
+        LevelGenerator levelGenerator;
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -40,6 +41,8 @@ namespace InvestorGame
                 house.Initialize(graphics.GraphicsDevice, new Vector2(300,300));
                 HouseList.Add(house);
             }
+            levelGenerator = new LevelGenerator();
+            levelGenerator.Initialize(graphics.GraphicsDevice);
             base.Initialize();
         }
 
@@ -93,6 +96,8 @@ namespace InvestorGame
             {
                 house.Draw(spriteBatch);
             }
+            levelGenerator.Draw(spriteBatch);
+
             spriteBatch.End();
             base.Draw(gameTime);
 
