@@ -15,23 +15,31 @@ namespace InvestorGame.Models
     internal class Lot
     {
         public Vector2 Position;
+        public Rectangle Area;
         public Texture2D Texture;
-        public int Value { get; private set; }
-        public int Investment;
-        public Player Owner;
+
         public LotState State;
+        public Player Owner;
+
+        public int Value;
+        public int Investment;       
+        
         private Random random;
+        
 
 
-        public void Initialize(GraphicsDevice graphicsDevice)
+        public void Initialize(GraphicsDevice graphicsDevice, Vector2 position)
         {
-            Position = new Vector2(300, 300);
+            Position = position;
+            Area = new Rectangle(Position.ToPoint().X, Position.ToPoint().Y, 100, 100);
             Texture = new Texture2D(graphicsDevice, 1, 1);
-            Texture.SetData(new Color[] { Color.DarkSlateGray });
-            Owner = Player.AI;
+            Texture.SetData(new Color[] { OwnColors.Green });
             State = LotState.Empty;
+            Owner = Player.AI;
             random = new Random();
             Value = random.Next(500, 2000);
+            Investment = 0;
+                
         }
 
         public void Update()

@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="Game.cs" />
     <Compile Include="Models\Lot.cs" />
-    <Compile Include="Models\Color.cs" />
+    <Compile Include="Models\OwnColors.cs" />
     <Compile Include="Models\LotState.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Program.cs" />

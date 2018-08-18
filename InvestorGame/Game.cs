@@ -18,6 +18,8 @@ namespace InvestorGame
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
             Content.RootDirectory = "Content";
         }
 
@@ -30,12 +32,12 @@ namespace InvestorGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            IsMouseVisible = true;
             HouseList = new List<Lot>();
             for(int i = 0; i < 1; i++)
             {
                 Lot house = new Lot();
-                house.Initialize(graphics.GraphicsDevice, Player.AI);
+                house.Initialize(graphics.GraphicsDevice, new Vector2(300,300));
                 HouseList.Add(house);
             }
             base.Initialize();
@@ -83,7 +85,7 @@ namespace InvestorGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(OwnColors.LightGreen);
 
             spriteBatch.Begin();
             // TODO: Add your drawing code here
