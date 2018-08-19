@@ -79,30 +79,51 @@ namespace InvestorGame
         protected override void Update(GameTime gameTime)
         {
             MouseState currentMouseState = Mouse.GetState();
-            if(currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
+            if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
             {
                 Debug.WriteLine("Mouse click");
-                foreach(Lot lot in Lots)
+                //Map 
+                if (currentMouseState.Position.Y < 620)
                 {
-                    if (lot.CollisionCheck().Contains(currentMouseState.Position)){
-                        Debug.WriteLine(lot.Value);
-                        lot.Selected = true;
-                        navbar.UpdateSelected(lot);
-                    }
-                    else
+                    foreach (Lot lot in Lots)
                     {
-                        lot.Selected = false;
-                        if (navbar.GetSelected() == lot)
+                        if (lot.CollisionCheck().Contains(currentMouseState.Position))
                         {
-                            
-                            navbar.UpdateSelected(null);
+                            Debug.WriteLine(lot.Value);
+                            lot.Selected = true;
+                            navbar.UpdateSelected(lot);
                         }
-                        
+                        else
+                        {
+                            lot.Selected = false;
+                            if (navbar.GetSelected() == lot)
+                            {
+
+                                navbar.UpdateSelected(null);
+                            }
+
+                        }
+
+                    }
+                }
+                //UI begins at Y = 620
+                if (navbar.buySellButton.CollisionCheck().Contains(currentMouseState.Position) && navbar.GetSelected() != null)
+                {
+                    Debug.WriteLine("buy sell clicked");
+                    if(navbar.buySellButton.State == BuySellButtonState.Buy)
+                    {
+                        navbar.GetSelected().Owner = Player.Human;
+                    }
+
+                    if (navbar.buySellButton.State == BuySellButtonState.Sell)
+                    {
+                        navbar.GetSelected().Owner = Player.AI;
                     }
 
                 }
             }
             previousMouseState = currentMouseState;
+            navbar.Update();
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();

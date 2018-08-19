@@ -72,8 +72,19 @@ namespace InvestorGame.Models
             {
                 spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, 100, 100), OwnColors.DarkGreen);
             }
+
             spriteBatch.Draw(Texture, new Rectangle((int)Position.X+5, (int)Position.Y+5, 90, 90), Color.White);            
             spriteBatch.DrawString(font, Value.ToString(), new Vector2(Position.X + 10, Position.Y + 10), OwnColors.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+
+
+            if (Owner == Player.Human)
+            {
+                spriteBatch.DrawString(font, "Player", new Vector2(Position.X + 10, Position.Y + 40), OwnColors.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+            }
+            if (Owner == Player.AI)
+            {
+                spriteBatch.DrawString(font, "Public", new Vector2(Position.X + 10, Position.Y + 40), OwnColors.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+            }
 
         }    
           

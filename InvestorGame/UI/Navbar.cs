@@ -13,7 +13,7 @@ namespace InvestorGame.UI
     {
         private Texture2D Texture;
         private Vector2 Position;
-        private BuySellButton buySellButton;
+        public BuySellButton buySellButton;
         private Lot SelectedLot;
 
         public void Initialize(GraphicsDevice graphicsDevice)
@@ -39,19 +39,38 @@ namespace InvestorGame.UI
 
         public void Update()
         {
-
-        }
-        
-        public void Draw(SpriteBatch spriteBatch, SpriteFont bigFont)
-        {
-            spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, 1280, 100), Color.White);
-            buySellButton.Draw(spriteBatch, bigFont);
-            
+            if(SelectedLot == null)
+            {
+                buySellButton.State = BuySellButtonState.None;
+            }
 
             if (SelectedLot != null)
             {
-                spriteBatch.DrawString(bigFont, "Value:", new Vector2(Position.X + 200, Position.Y + 30), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
-                spriteBatch.DrawString(bigFont, SelectedLot.Value.ToString(), new Vector2(Position.X + 280, Position.Y + 30), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                if(SelectedLot.Owner == Player.Human)
+                {
+
+                    buySellButton.State = BuySellButtonState.Sell;
+                }
+            }
+
+            if (SelectedLot != null)
+            {
+                if (SelectedLot.Owner == Player.AI)
+                {
+                    buySellButton.State = BuySellButtonState.Buy;
+                }
+            }
+        }
+        
+        //UI begins at Y = 620
+        public void Draw(SpriteBatch spriteBatch, SpriteFont bigFont)
+        {
+            spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, 1280, 100), Color.White);
+            buySellButton.Draw(spriteBatch, bigFont);            
+
+            if (SelectedLot != null)
+            {               
+                spriteBatch.DrawString(bigFont, "Value: " + SelectedLot.Value.ToString(), new Vector2(Position.X + 300, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
             }
             
         }
