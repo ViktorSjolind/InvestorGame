@@ -1,9 +1,11 @@
 ﻿using InvestorGame.Models;
+using InvestorGame.UI;
 using InvestorGame.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace InvestorGame
 {
@@ -16,6 +18,10 @@ namespace InvestorGame
         SpriteBatch spriteBatch;
         List<Lot> Lots;
         LevelGenerator levelGenerator;
+        Navbar navbar;
+        SpriteFont FontUIBig;
+        MouseState previousMouseState;
+
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -38,6 +44,8 @@ namespace InvestorGame
             levelGenerator = new LevelGenerator();
             levelGenerator.Initialize(graphics.GraphicsDevice);
             Lots = levelGenerator.CreateLots();
+            navbar = new Navbar();
+            navbar.Initialize(graphics.GraphicsDevice);
             base.Initialize();
         }
 
@@ -49,6 +57,7 @@ namespace InvestorGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            FontUIBig = Content.Load<SpriteFont>("FontUI");
 
             // TODO: use this.Content to load your game content here
         }
@@ -69,6 +78,32 @@ namespace InvestorGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            MouseState currentMouseState = Mouse.GetState();
+            if(currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
+            {
+                Debug.WriteLine("Mouse click");
+                foreach(Lot lot in Lots)
+                {
+                    if (lot.CollisionCheck().Contains(currentMouseState.Position)){
+                        Debug.WriteLine(lot.Value);
+                        lot.Selected = true;
+                        navbar.UpdateSelected(lot);
+                    }
+                    else
+                    {
+                        lot.Selected = false;
+                        if (navbar.GetSelected() == lot)
+                        {
+                            
+                            navbar.UpdateSelected(null);
+                        }
+                        
+                    }
+
+                }
+            }
+            previousMouseState = currentMouseState;
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -89,9 +124,13 @@ namespace InvestorGame
             // TODO: Add your drawing code here
             foreach(Lot lot in Lots)
             {
-                lot.Draw(spriteBatch);
+                lot.Draw(spriteBatch, FontUIBig);
             }
-            levelGenerator.Draw(spriteBatch);
+            //levelGenerator.Draw(spriteBatch);
+            navbar.Draw(spriteBatch, FontUIBig);
+
+
+
 
             spriteBatch.End();
             base.Draw(gameTime);

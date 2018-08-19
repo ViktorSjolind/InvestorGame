@@ -1,4 +1,5 @@
 ﻿using InvestorGame.Models;
+using InvestorGame.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -20,13 +21,11 @@ namespace InvestorGame.Models
 
         public LotState State;
         public Player Owner;
-
+        
         public int Value;
-        public int Investment;       
-        
-        private Random random;
-        
+        public int Investment;
 
+        public bool Selected;
 
         public void Initialize(GraphicsDevice graphicsDevice, Vector2 position)
         {
@@ -36,9 +35,9 @@ namespace InvestorGame.Models
             Texture.SetData(new Color[] { OwnColors.Green });
             State = LotState.Empty;
             Owner = Player.AI;
-            random = new Random();
-            Value = random.Next(500, 2000);
+            Value = RandomGenerator.GetInteger(500, 2000);
             Investment = 0;
+            Selected = false;
                 
         }
 
@@ -49,7 +48,7 @@ namespace InvestorGame.Models
 
         public void UpdateValue()
         {
-            Value = random.Next(0, 1) < 1 ? LowerValue() : HigherValue(); 
+            Value = RandomGenerator.GetInteger(0, 1) < 1 ? LowerValue() : HigherValue(); 
         }
 
         private int HigherValue()
@@ -62,9 +61,20 @@ namespace InvestorGame.Models
             return (int)(0.1d * Value);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public Rectangle CollisionCheck()
         {
-            spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, 100, 100), Color.White);
+            return Area;
+        }
+
+        public void Draw(SpriteBatch spriteBatch, SpriteFont font)
+        {
+            if (Selected)
+            {
+                spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, 100, 100), OwnColors.DarkGreen);
+            }
+            spriteBatch.Draw(Texture, new Rectangle((int)Position.X+5, (int)Position.Y+5, 90, 90), Color.White);            
+            spriteBatch.DrawString(font, Value.ToString(), new Vector2(Position.X + 10, Position.Y + 10), OwnColors.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+
         }    
           
     }

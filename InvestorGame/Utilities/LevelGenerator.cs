@@ -15,6 +15,7 @@ namespace InvestorGame.Utilities
         public int Width;
         public int Height;
         private GraphicsDevice Graphics;
+        private Random random;
 
         public void Initialize(GraphicsDevice graphicsDevice)
         {
@@ -23,7 +24,7 @@ namespace InvestorGame.Utilities
             GridTexture.SetData(new Color[] { OwnColors.Red });
             Width = graphicsDevice.Viewport.Width;
             Height = graphicsDevice.Viewport.Height;
-
+            random = new Random();
         }      
 
         public void Draw(SpriteBatch spriteBatch)
@@ -44,6 +45,7 @@ namespace InvestorGame.Utilities
             {
                 for (float y = -rows; y < rows; y++)
                 {
+                    // && random.Next(0,2)>0
                     if (x % 3 == 0 && y % 3 == 0 && x > -columns+1 && x < columns/2 && y >= -rows/2 && y < rows/2)
                     {
                         Lot lot = new Lot();
