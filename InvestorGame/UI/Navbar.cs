@@ -15,6 +15,7 @@ namespace InvestorGame.UI
         private Vector2 Position;
         public BuySellButton buySellButton;
         private Lot SelectedLot;
+        public BuildButton BuildHouseButton;
 
         public void Initialize(GraphicsDevice graphicsDevice)
         {
@@ -24,6 +25,9 @@ namespace InvestorGame.UI
             buySellButton = new BuySellButton();
             buySellButton.Initialize(graphicsDevice);
             SelectedLot = null;
+
+            BuildHouseButton = new BuildButton();
+            BuildHouseButton.Initialize(graphicsDevice, BuildButtonState.House, new Vector2(650, 620));
         }
 
         public void UpdateSelected(Lot lot)
@@ -63,16 +67,29 @@ namespace InvestorGame.UI
         }
         
         //UI begins at Y = 620
-        public void Draw(SpriteBatch spriteBatch, SpriteFont bigFont)
+        public void Draw(SpriteBatch spriteBatch, SpriteFont bigFont, Texture2D spriteSheet)
         {
+            //Buy sell button
             spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, 1280, 100), Color.White);
             buySellButton.Draw(spriteBatch, bigFont);            
 
             if (SelectedLot != null)
             {               
-                spriteBatch.DrawString(bigFont, "Value: " + SelectedLot.Value.ToString(), new Vector2(Position.X + 300, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
-            }
-            
+                //Lot metadata
+                spriteBatch.DrawString(bigFont, "Value: " + SelectedLot.Value.ToString(), new Vector2(Position.X + 200, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(bigFont, "Investment: " + SelectedLot.Investment.ToString(), new Vector2(Position.X + 350, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                //Build
+                
+                if(SelectedLot.Owner == Player.Human)
+                {
+                    spriteBatch.DrawString(bigFont, "Build: ", new Vector2(Position.X + 600, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                    BuildHouseButton.Draw(spriteBatch, bigFont, spriteSheet);
+                }
+                
+            }            
+
+            //Player money
+            spriteBatch.DrawString(bigFont, "Money: " + Game.Money, new Vector2(Position.X + 1000, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
         }
     }
 }

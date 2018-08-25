@@ -21,6 +21,10 @@ namespace InvestorGame
         Navbar navbar;
         SpriteFont FontUIBig;
         MouseState previousMouseState;
+        float TimerDelay = 1;
+        float TimerRemaining;
+        public static int Money = 1000;
+        Texture2D SpriteSheet;
 
         public Game()
         {
@@ -46,6 +50,8 @@ namespace InvestorGame
             Lots = levelGenerator.CreateLots();
             navbar = new Navbar();
             navbar.Initialize(graphics.GraphicsDevice);
+            TimerRemaining = TimerDelay;
+
             base.Initialize();
         }
 
@@ -58,7 +64,7 @@ namespace InvestorGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             FontUIBig = Content.Load<SpriteFont>("FontUI");
-
+            SpriteSheet = Content.Load<Texture2D>("SpritesheetInvestorGame");
             // TODO: use this.Content to load your game content here
         }
 
@@ -78,6 +84,7 @@ namespace InvestorGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            //Check mouse
             MouseState currentMouseState = Mouse.GetState();
             if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
             {
@@ -112,19 +119,62 @@ namespace InvestorGame
                     Debug.WriteLine("buy sell clicked");
                     if(navbar.buySellButton.State == BuySellButtonState.Buy)
                     {
-                        navbar.GetSelected().Owner = Player.Human;
+                        Lot selectedLot = navbar.GetSelected();
+                        if (selectedLot.Value <= Money)
+                        {
+                            Money -= selectedLot.Value;
+                            selectedLot.Owner = Player.Human;
+                            selectedLot.Investment = selectedLot.Value;
+                        }                       
+                        
                     }
 
                     if (navbar.buySellButton.State == BuySellButtonState.Sell)
                     {
-                        navbar.GetSelected().Owner = Player.AI;
+                        Lot selectedLot = navbar.GetSelected();
+                        Money += selectedLot.Value;
+                        selectedLot.Owner = Player.AI;
                     }
 
+
+                }
+
+
+                if (navbar.BuildHouseButton.CollisionCheck().Contains(currentMouseState.Position) && navbar.GetSelected() != null)
+                {
+                    Debug.WriteLine("build house clicked");
+                    Lot selectedLot = navbar.GetSelected();
+                    int housePrice = 1000;
+                    if (Money >= housePrice && selectedLot.State != LotState.House)
+                    {
+                        Money -= housePrice;
+                        selectedLot.Investment += housePrice;
+                        selectedLot.Value += housePrice;
+                    }
+                    
                 }
             }
             previousMouseState = currentMouseState;
             navbar.Update();
 
+            //Update prices
+            float timePassed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            TimerRemaining -= timePassed;
+            if(TimerRemaining <= 0)
+            {
+                Debug.WriteLine("Happening!!");
+                foreach(Lot lot in Lots)
+                {
+                    lot.UpdateValue();
+                }
+                TimerRemaining = TimerDelay;
+            }
+
+
+
+
+
+            //Exit game
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -145,12 +195,10 @@ namespace InvestorGame
             // TODO: Add your drawing code here
             foreach(Lot lot in Lots)
             {
-                lot.Draw(spriteBatch, FontUIBig);
+                lot.Draw(spriteBatch, FontUIBig, SpriteSheet);
             }
             //levelGenerator.Draw(spriteBatch);
-            navbar.Draw(spriteBatch, FontUIBig);
-
-
+            navbar.Draw(spriteBatch, FontUIBig, SpriteSheet);
 
 
             spriteBatch.End();

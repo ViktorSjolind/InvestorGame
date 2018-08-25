@@ -9,15 +9,16 @@ using System.Threading.Tasks;
 
 namespace InvestorGame.UI
 {
-    internal class BuySellButton
+    internal class BuildButton
     {
+
         private Texture2D Texture;
         private Texture2D TextureWhite;
         private Vector2 Position;
-        public BuySellButtonState State;
+        public BuildButtonState State;
         public Rectangle Area;
 
-        public void Initialize(GraphicsDevice graphicsDevice)
+        public void Initialize(GraphicsDevice graphicsDevice, BuildButtonState state, Vector2 position)
         {
             Texture = new Texture2D(graphicsDevice, 1, 1);
             Texture.SetData(new Color[] { OwnColors.Black });
@@ -25,9 +26,9 @@ namespace InvestorGame.UI
             TextureWhite = new Texture2D(graphicsDevice, 1, 1);
             TextureWhite.SetData(new Color[] { OwnColors.White });
 
-            Position = new Vector2(0, 620);
-            State = BuySellButtonState.None;
-            Area = new Rectangle(Position.ToPoint().X+90, Position.ToPoint().Y+30, 62, 35);
+            Position = position;
+            State = state;
+            Area = new Rectangle(Position.ToPoint().X-10, Position.ToPoint().Y-10, 120, 120);
         }
 
 
@@ -41,30 +42,42 @@ namespace InvestorGame.UI
             return Area;
         }
 
-        public void Draw(SpriteBatch spriteBatch, SpriteFont bigFont)
+        public void Draw(SpriteBatch spriteBatch, SpriteFont bigFont, Texture2D spriteSheet)
         {
-            
+
 
             //Font size is compiled as 36px, scaled down for better quality
-            if (State == BuySellButtonState.None)
+            if (State == BuildButtonState.House)
             {
+                //Highlight button
+                spriteBatch.Draw(TextureWhite, Area, OwnColors.Red);
+                spriteBatch.Draw(spriteSheet, new Rectangle((int)Position.X, (int)Position.Y, 100, 100), new Rectangle(0, 500, 100, 100), Color.White);
 
             }
-            if (State == BuySellButtonState.Buy)
+            /*
+            if (State == BuildButtonState.Shop)
             {
                 //Highlight button
                 spriteBatch.Draw(TextureWhite, Area, OwnColors.White);
                 spriteBatch.Draw(Texture, new Rectangle(Area.X + 2, Area.Y + 2, Area.Width - 4, Area.Height - 4), OwnColors.White);
                 spriteBatch.DrawString(bigFont, "Buy", new Vector2(100, 655), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
             }
-            if (State == BuySellButtonState.Sell)
+            if (State == BuildButtonState.Office)
             {
                 //Highlight button
                 spriteBatch.Draw(TextureWhite, Area, OwnColors.White);
                 spriteBatch.Draw(Texture, new Rectangle(Area.X + 2, Area.Y + 2, Area.Width - 4, Area.Height - 4), OwnColors.White);
                 spriteBatch.DrawString(bigFont, "Sell", new Vector2(100, 655), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
             }
-            
+
+            if (State == BuildButtonState.Factory)
+            {
+                //Highlight button
+                spriteBatch.Draw(TextureWhite, Area, OwnColors.White);
+                spriteBatch.Draw(Texture, new Rectangle(Area.X + 2, Area.Y + 2, Area.Width - 4, Area.Height - 4), OwnColors.White);
+                spriteBatch.DrawString(bigFont, "Sell", new Vector2(100, 655), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+            }
+            */
         }
     }
 }

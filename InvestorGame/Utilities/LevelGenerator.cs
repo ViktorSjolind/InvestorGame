@@ -46,7 +46,7 @@ namespace InvestorGame.Utilities
                 for (float y = -rows; y < rows; y++)
                 {
                     // && random.Next(0,2)>0
-                    if (x % 3 == 0 && y % 3 == 0 && x > -columns+1 && x < columns/2 && y >= -rows/2 && y < rows/2)
+                    if (x % 3 == 0 && y % 3 == 0 && x > -columns+1 && x < columns/2 && y >= -rows/2 && y < rows/2 && random.Next(0, 2) > 0)
                     {
                         Lot lot = new Lot();
                         lot.Initialize(Graphics, new Vector2((int)(Width / 2 + x * gridSize), (int)(Height / 2 + y * gridSize)));

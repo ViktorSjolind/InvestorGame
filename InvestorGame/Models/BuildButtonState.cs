@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace InvestorGame.Models
 {
-    internal enum LotState
+    internal enum BuildButtonState
     {
-        Empty,
         House,
         Shop,
         Office,
         Factory
-
     }
 }
