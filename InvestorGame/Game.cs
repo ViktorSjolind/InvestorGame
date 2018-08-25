@@ -23,7 +23,7 @@ namespace InvestorGame
         MouseState previousMouseState;
         private float TimerDelay = 1;
         private float TimerRemaining;
-        public static int Money = 5000;
+        public static int Money = 50000;
         Texture2D SpriteSheet;
 
         public Game()
@@ -151,6 +151,7 @@ namespace InvestorGame
                         Money -= price;
                         selectedLot.Investment += price;
                         selectedLot.Value += price;
+                        selectedLot.State = LotState.House;
                     }
                     
                 }
@@ -165,6 +166,7 @@ namespace InvestorGame
                         Money -= price;
                         selectedLot.Investment += price;
                         selectedLot.Value += price;
+                        selectedLot.State = LotState.Shop;
                     }
 
                 }
@@ -179,6 +181,7 @@ namespace InvestorGame
                         Money -= price;
                         selectedLot.Investment += price;
                         selectedLot.Value += price;
+                        selectedLot.State = LotState.Office;
                     }
 
                 }
