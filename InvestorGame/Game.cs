@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace InvestorGame
 {
@@ -16,7 +17,7 @@ namespace InvestorGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        List<Lot> Lots;
+        List<IMapComponents> Map;
         LevelGenerator levelGenerator;
         Navbar navbar;
         SpriteFont FontUIBig;
@@ -44,10 +45,9 @@ namespace InvestorGame
         {
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
-            Lots = new List<Lot>();
             levelGenerator = new LevelGenerator();
             levelGenerator.Initialize(graphics.GraphicsDevice);
-            Lots = levelGenerator.CreateLots();
+            Map = levelGenerator.CreateMap1();
             navbar = new Navbar();
             navbar.Initialize(graphics.GraphicsDevice);
             TimerRemaining = TimerDelay;
@@ -92,11 +92,12 @@ namespace InvestorGame
                 //Map 
                 if (currentMouseState.Position.Y < 620)
                 {
-                    foreach (Lot lot in Lots)
+                    foreach (Lot lot in Map.OfType<Lot>())
                     {
                         if (lot.CollisionCheck().Contains(currentMouseState.Position))
                         {
                             Debug.WriteLine(lot.Value);
+                            Debug.WriteLine(lot.Position.X.ToString() + " " + lot.Position.Y.ToString());
                             lot.Selected = true;
                             navbar.UpdateSelected(lot);
                         }
@@ -196,9 +197,9 @@ namespace InvestorGame
             if(TimerRemaining <= 0)
             {
                 Debug.WriteLine("Happening!!");
-                foreach(Lot lot in Lots)
+                foreach(IMapComponents component in Map)
                 {
-                    lot.UpdateValue();
+                    component.UpdateValue();
                 }
                 TimerRemaining = TimerDelay;
             }
@@ -226,10 +227,11 @@ namespace InvestorGame
 
             spriteBatch.Begin();
             // TODO: Add your drawing code here
-            foreach(Lot lot in Lots)
+            foreach(IMapComponents component in Map)
             {
-                lot.Draw(spriteBatch, FontUIBig, SpriteSheet);
+                component.Draw(spriteBatch, FontUIBig, SpriteSheet);
             }
+            //Draw grid
             //levelGenerator.Draw(spriteBatch);
             navbar.Draw(spriteBatch, FontUIBig, SpriteSheet);
 

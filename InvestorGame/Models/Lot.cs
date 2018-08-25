@@ -13,7 +13,7 @@ namespace InvestorGame.Models
     /// <summary>
     /// Land area that can developed to house or office 
     /// </summary>
-    internal class Lot
+    internal class Lot : IMapComponents
     {
         public Vector2 Position;
         public Rectangle Area;
@@ -108,7 +108,7 @@ namespace InvestorGame.Models
             spriteBatch.DrawString(font, Value.ToString(), new Vector2(Position.X + 10, Position.Y + 10), OwnColors.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
             
 
-        }    
-          
+        }        
+        
     }
 }
