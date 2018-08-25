@@ -24,8 +24,9 @@ namespace InvestorGame
         MouseState previousMouseState;
         private float TimerDelay = 1;
         private float TimerRemaining;
-        public static int Money = 50000;
+        public static int Money = 2000;
         Texture2D SpriteSheet;
+        Economy economy;
 
         public Game()
         {
@@ -50,6 +51,7 @@ namespace InvestorGame
             Map = levelGenerator.CreateMap1();
             navbar = new Navbar();
             navbar.Initialize(graphics.GraphicsDevice);
+            economy = new Economy(Map);
             TimerRemaining = TimerDelay;
 
             base.Initialize();
@@ -197,10 +199,7 @@ namespace InvestorGame
             if(TimerRemaining <= 0)
             {
                 Debug.WriteLine("Happening!!");
-                foreach(IMapComponents component in Map)
-                {
-                    component.UpdateValue();
-                }
+                economy.UpdateLotPrices();
                 TimerRemaining = TimerDelay;
             }
 

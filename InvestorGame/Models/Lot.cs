@@ -20,6 +20,8 @@ namespace InvestorGame.Models
         public Texture2D Texture;
 
         public LotState State;
+        //1, 1.5, 2
+        public float PriceGroup;
         public int LotVariant;
         public Player Owner;
         
@@ -37,7 +39,7 @@ namespace InvestorGame.Models
             State = LotState.Empty;
             LotVariant = RandomGenerator.GetInteger(0, 3);
             Owner = Player.AI;
-            Value = RandomGenerator.GetInteger(500, 2000);
+            Value = RandomGenerator.GetInteger(500, 1000);
             Investment = 0;
             Selected = false;
                 
@@ -46,22 +48,7 @@ namespace InvestorGame.Models
         public void Update()
         {
 
-        }
-
-        public void UpdateValue()
-        {
-            Value = RandomGenerator.GetInteger(0, 2) < 1 ? LowerValue() : HigherValue(); 
-        }
-
-        private int HigherValue()
-        {
-            return (int)(1.2d * Value);
-        }
-
-        private int LowerValue()
-        {
-            return (int)(0.9d * Value);
-        }
+        }        
 
         public Rectangle CollisionCheck()
         {
@@ -105,7 +92,7 @@ namespace InvestorGame.Models
             }
 
 
-            spriteBatch.DrawString(font, Value.ToString(), new Vector2(Position.X + 10, Position.Y + 10), OwnColors.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, "$" + Value.ToString(), new Vector2(Position.X + 10, Position.Y + 10), OwnColors.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
             
 
         }        

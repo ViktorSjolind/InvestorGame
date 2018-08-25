@@ -11,7 +11,6 @@ namespace InvestorGame.Models
     interface IMapComponents
     {
         void Draw(SpriteBatch spriteBatch, SpriteFont font, Texture2D spriteSheet);
-        void UpdateValue();
         Rectangle CollisionCheck();
     }
 }

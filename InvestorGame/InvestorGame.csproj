@@ -42,6 +42,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Economy.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Models\BuildButtonState.cs" />
     <Compile Include="Models\BuySellButtonState.cs" />
