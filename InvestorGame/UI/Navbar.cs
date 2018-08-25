@@ -35,7 +35,7 @@ namespace InvestorGame.UI
             BuildShopButton.Initialize(graphicsDevice, BuildButtonState.Shop, new Vector2(750, 620));
 
             BuildOfficeButton = new BuildButton();
-            BuildOfficeButton.Initialize(graphicsDevice, BuildButtonState.Shop, new Vector2(850, 620));
+            BuildOfficeButton.Initialize(graphicsDevice, BuildButtonState.Office, new Vector2(850, 620));
         }
 
         public void UpdateSelected(Lot lot)
