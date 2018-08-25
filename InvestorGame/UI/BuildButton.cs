@@ -28,7 +28,7 @@ namespace InvestorGame.UI
 
             Position = position;
             State = state;
-            Area = new Rectangle(Position.ToPoint().X-10, Position.ToPoint().Y-10, 120, 120);
+            Area = new Rectangle(Position.ToPoint().X+10, Position.ToPoint().Y+10, 80, 80);
         }
 
 
@@ -54,22 +54,23 @@ namespace InvestorGame.UI
                 spriteBatch.Draw(spriteSheet, new Rectangle((int)Position.X, (int)Position.Y, 100, 100), new Rectangle(0, 500, 100, 100), Color.White);
 
             }
-            /*
+            
             if (State == BuildButtonState.Shop)
             {
                 //Highlight button
-                spriteBatch.Draw(TextureWhite, Area, OwnColors.White);
-                spriteBatch.Draw(Texture, new Rectangle(Area.X + 2, Area.Y + 2, Area.Width - 4, Area.Height - 4), OwnColors.White);
-                spriteBatch.DrawString(bigFont, "Buy", new Vector2(100, 655), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                spriteBatch.Draw(TextureWhite, Area, OwnColors.Red);
+                spriteBatch.Draw(spriteSheet, new Rectangle((int)Position.X, (int)Position.Y, 100, 100), new Rectangle(100, 500, 100, 100), Color.White);
+                
             }
+
             if (State == BuildButtonState.Office)
             {
                 //Highlight button
-                spriteBatch.Draw(TextureWhite, Area, OwnColors.White);
-                spriteBatch.Draw(Texture, new Rectangle(Area.X + 2, Area.Y + 2, Area.Width - 4, Area.Height - 4), OwnColors.White);
-                spriteBatch.DrawString(bigFont, "Sell", new Vector2(100, 655), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                spriteBatch.Draw(TextureWhite, Area, OwnColors.Red);
+                spriteBatch.Draw(spriteSheet, new Rectangle((int)Position.X, (int)Position.Y, 100, 100), new Rectangle(300, 500, 100, 100), Color.White);
             }
 
+            /*
             if (State == BuildButtonState.Factory)
             {
                 //Highlight button

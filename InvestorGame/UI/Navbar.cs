@@ -16,6 +16,8 @@ namespace InvestorGame.UI
         public BuySellButton buySellButton;
         private Lot SelectedLot;
         public BuildButton BuildHouseButton;
+        public BuildButton BuildShopButton;
+        public BuildButton BuildOfficeButton;
 
         public void Initialize(GraphicsDevice graphicsDevice)
         {
@@ -28,6 +30,12 @@ namespace InvestorGame.UI
 
             BuildHouseButton = new BuildButton();
             BuildHouseButton.Initialize(graphicsDevice, BuildButtonState.House, new Vector2(650, 620));
+
+            BuildShopButton = new BuildButton();
+            BuildShopButton.Initialize(graphicsDevice, BuildButtonState.Shop, new Vector2(750, 620));
+
+            BuildOfficeButton = new BuildButton();
+            BuildOfficeButton.Initialize(graphicsDevice, BuildButtonState.Shop, new Vector2(850, 620));
         }
 
         public void UpdateSelected(Lot lot)
@@ -84,6 +92,8 @@ namespace InvestorGame.UI
                 {
                     spriteBatch.DrawString(bigFont, "Build: ", new Vector2(Position.X + 600, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
                     BuildHouseButton.Draw(spriteBatch, bigFont, spriteSheet);
+                    BuildShopButton.Draw(spriteBatch, bigFont, spriteSheet);
+                    BuildOfficeButton.Draw(spriteBatch, bigFont, spriteSheet);
                 }
                 
             }            

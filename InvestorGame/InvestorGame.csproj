@@ -45,6 +45,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="Models\BuildButtonState.cs" />
     <Compile Include="Models\BuySellButtonState.cs" />
+    <Compile Include="Models\IState.cs" />
     <Compile Include="Models\Lot.cs" />
     <Compile Include="Models\OwnColors.cs" />
     <Compile Include="Models\LotState.cs" />
@@ -52,7 +53,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\BuildButton.cs" />
+    <Compile Include="UI\Button.cs" />
     <Compile Include="UI\BuySellButton.cs" />
+    <Compile Include="UI\IInterfaceComponent.cs" />
+    <Compile Include="UI\Label.cs" />
     <Compile Include="UI\Navbar.cs" />
     <Compile Include="Utilities\LevelGenerator.cs" />
     <Compile Include="Utilities\RandomGenerator.cs" />

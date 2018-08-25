@@ -21,9 +21,9 @@ namespace InvestorGame
         Navbar navbar;
         SpriteFont FontUIBig;
         MouseState previousMouseState;
-        float TimerDelay = 1;
-        float TimerRemaining;
-        public static int Money = 1000;
+        private float TimerDelay = 1;
+        private float TimerRemaining;
+        public static int Money = 5000;
         Texture2D SpriteSheet;
 
         public Game()
@@ -133,6 +133,7 @@ namespace InvestorGame
                     {
                         Lot selectedLot = navbar.GetSelected();
                         Money += selectedLot.Value;
+                        selectedLot.Investment = 0;
                         selectedLot.Owner = Player.AI;
                     }
 
@@ -144,15 +145,44 @@ namespace InvestorGame
                 {
                     Debug.WriteLine("build house clicked");
                     Lot selectedLot = navbar.GetSelected();
-                    int housePrice = 1000;
-                    if (Money >= housePrice && selectedLot.State != LotState.House)
+                    int price = 1000;
+                    if (Money >= price && selectedLot.State != LotState.House)
                     {
-                        Money -= housePrice;
-                        selectedLot.Investment += housePrice;
-                        selectedLot.Value += housePrice;
+                        Money -= price;
+                        selectedLot.Investment += price;
+                        selectedLot.Value += price;
                     }
                     
                 }
+
+                if (navbar.BuildShopButton.CollisionCheck().Contains(currentMouseState.Position) && navbar.GetSelected() != null)
+                {
+                    Debug.WriteLine("build shop clicked");
+                    Lot selectedLot = navbar.GetSelected();
+                    int price = 2000;
+                    if (Money >= price && selectedLot.State != LotState.Shop)
+                    {
+                        Money -= price;
+                        selectedLot.Investment += price;
+                        selectedLot.Value += price;
+                    }
+
+                }
+
+                if (navbar.BuildOfficeButton.CollisionCheck().Contains(currentMouseState.Position) && navbar.GetSelected() != null)
+                {
+                    Debug.WriteLine("build office clicked");
+                    Lot selectedLot = navbar.GetSelected();
+                    int price = 3000;
+                    if (Money >= price && selectedLot.State != LotState.Office)
+                    {
+                        Money -= price;
+                        selectedLot.Investment += price;
+                        selectedLot.Value += price;
+                    }
+
+                }
+
             }
             previousMouseState = currentMouseState;
             navbar.Update();
