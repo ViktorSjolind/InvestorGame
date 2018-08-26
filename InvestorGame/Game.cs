@@ -23,9 +23,11 @@ namespace InvestorGame
         SpriteFont FontUIBig;
         SpriteFont FontNotification;
         MouseState previousMouseState;
-        private float TimerDelay = 1;
+        private float TimerDelay = 3;
         private float TimerRemaining;
         public static int Money = 17000;
+        public static int Month = 1;
+        public static int Year = 2000;
         Texture2D SpriteSheet;
         Economy economy;
         Notification NotificationDisplayer;
@@ -218,12 +220,22 @@ namespace InvestorGame
 
             NotificationDisplayer.Update(gameTime);
 
-            //Update prices
+            //Update time and prices
             float timePassed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             TimerRemaining -= timePassed;
             if(TimerRemaining <= 0)
             {
-                Debug.WriteLine("Happening!!");
+                Debug.WriteLine("next month!!");
+                if(Month < 12)
+                {
+                    Month++;
+                }
+                else
+                {
+                    Month = 1;
+                    Year++;
+                }
+                Debug.WriteLine(Month + "/" + Year);
                 economy.UpdateLotPrices();
                 TimerRemaining = TimerDelay;
             }

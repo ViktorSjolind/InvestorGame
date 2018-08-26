@@ -16,18 +16,19 @@ namespace InvestorGame
         private int MaxEmptyPrice = 3000;
         private int MinEmptyPrice = 10;
         //Including lot
-        private int MaxHousePrice = 6000;
+        private int MaxHousePrice = 3000 + 10000 + 2000;
         private int MinHousePrice = 2000;
 
-        private int MaxShopPrice = 10000;
+        private int MaxShopPrice = 3000 + 10000 + 5000;
         private int MinShopPrice = 5000;
 
-        private int MaxOfficePrice = 20000;
+        private int MaxOfficePrice = 3000 + 20000 + 2000;
         private int MinOfficePrice = 10000;
 
         public int BuildHousePrice = 10000;
         public int BuildShopPrice = 15000;
         public int BuildOfficePrice = 30000;
+
 
         private List<Lot> Lots;
 
