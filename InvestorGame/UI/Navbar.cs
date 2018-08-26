@@ -84,27 +84,27 @@ namespace InvestorGame.UI
             if (SelectedLot != null)
             {               
                 //Lot metadata
-                spriteBatch.DrawString(bigFont, "Value: " + SelectedLot.Value.ToString(), new Vector2(Position.X + 200, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
-                spriteBatch.DrawString(bigFont, "Investment: " + SelectedLot.Investment.ToString(), new Vector2(Position.X + 350, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(bigFont, "Value: " + SelectedLot.Value.ToString("N0"), new Vector2(Position.X + 200, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(bigFont, "Investment: " + SelectedLot.Investment.ToString("N0"), new Vector2(Position.X + 350, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
                 //Build
                 
                 if(SelectedLot.Owner == Player.Human)
                 {
                     spriteBatch.DrawString(bigFont, "Build: ", new Vector2(Position.X + 600, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
                     BuildHouseButton.Draw(spriteBatch, bigFont, spriteSheet);
-                    spriteBatch.DrawString(bigFont, "$" + economy.BuildHousePrice.ToString(), new Vector2(Position.X + 660, Position.Y + 74), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                    spriteBatch.DrawString(bigFont, "$" + economy.BuildHousePrice.ToString("N0"), new Vector2(Position.X + 660, Position.Y + 74), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
 
                     BuildShopButton.Draw(spriteBatch, bigFont, spriteSheet);
-                    spriteBatch.DrawString(bigFont, "$" + economy.BuildShopPrice.ToString(), new Vector2(Position.X + 760, Position.Y + 74), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                    spriteBatch.DrawString(bigFont, "$" + economy.BuildShopPrice.ToString("N0"), new Vector2(Position.X + 760, Position.Y + 74), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
 
                     BuildOfficeButton.Draw(spriteBatch, bigFont, spriteSheet);
-                    spriteBatch.DrawString(bigFont, "$" + economy.BuildOfficePrice.ToString(), new Vector2(Position.X + 860, Position.Y + 74), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                    spriteBatch.DrawString(bigFont, "$" + economy.BuildOfficePrice.ToString("N0"), new Vector2(Position.X + 860, Position.Y + 74), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
                 }
                 
             }            
 
             //Player money
-            spriteBatch.DrawString(bigFont, "Money: " + Game.Money, new Vector2(Position.X + 1000, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(bigFont, "Money: " + Game.Money.ToString("N0"), new Vector2(Position.X + 1000, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
         }
     }
 }

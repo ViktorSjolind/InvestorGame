@@ -92,7 +92,7 @@ namespace InvestorGame.Models
             }
 
 
-            spriteBatch.DrawString(font, "$" + Value.ToString(), new Vector2(Position.X + 10, Position.Y + 10), OwnColors.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, "$" + Value.ToString("N0"), new Vector2(Position.X + 10, Position.Y + 10), OwnColors.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
             
 
         }        
