@@ -61,6 +61,7 @@
     <Compile Include="UI\IInterfaceComponent.cs" />
     <Compile Include="UI\Label.cs" />
     <Compile Include="UI\Navbar.cs" />
+    <Compile Include="UI\Notification.cs" />
     <Compile Include="Utilities\LevelGenerator.cs" />
     <Compile Include="Utilities\RandomGenerator.cs" />
   </ItemGroup>

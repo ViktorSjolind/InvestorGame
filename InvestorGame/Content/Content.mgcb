@@ -32,3 +32,17 @@
 /processorParam:TextureFormat=Color
 /build:SpritesheetInvestorGame.png
 
+#begin FontNotification.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:FontNotification.spritefont
+
+#begin FontNotificationBackground.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:FontNotificationBackground.spritefont
+

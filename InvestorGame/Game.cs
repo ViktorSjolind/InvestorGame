@@ -21,12 +21,14 @@ namespace InvestorGame
         LevelGenerator levelGenerator;
         Navbar navbar;
         SpriteFont FontUIBig;
+        SpriteFont FontNotification;
         MouseState previousMouseState;
         private float TimerDelay = 1;
         private float TimerRemaining;
         public static int Money = 2000;
         Texture2D SpriteSheet;
         Economy economy;
+        Notification NotificationDisplayer;
 
         public Game()
         {
@@ -53,6 +55,7 @@ namespace InvestorGame
             navbar.Initialize(graphics.GraphicsDevice);
             economy = new Economy(Map);
             TimerRemaining = TimerDelay;
+            NotificationDisplayer = new Notification(graphics.GraphicsDevice);
 
             base.Initialize();
         }
@@ -66,6 +69,7 @@ namespace InvestorGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             FontUIBig = Content.Load<SpriteFont>("FontUI");
+            FontNotification = Content.Load<SpriteFont>("FontNotification");
             SpriteSheet = Content.Load<Texture2D>("SpritesheetInvestorGame");
             // TODO: use this.Content to load your game content here
         }
@@ -90,7 +94,7 @@ namespace InvestorGame
             MouseState currentMouseState = Mouse.GetState();
             if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
             {
-                Debug.WriteLine("Mouse click");
+                Debug.WriteLine("Mouse click");                
                 //Map 
                 if (currentMouseState.Position.Y < 620)
                 {
@@ -125,15 +129,21 @@ namespace InvestorGame
                         Lot selectedLot = navbar.GetSelected();
                         if (selectedLot.Value <= Money)
                         {
+                            NotificationDisplayer.DisplayNotification("Bought!", 2);
                             Money -= selectedLot.Value;
                             selectedLot.Owner = Player.Human;
                             selectedLot.Investment = selectedLot.Value;
-                        }                       
+                        }
+                        if(selectedLot.Value > Money)
+                        {
+                            NotificationDisplayer.DisplayNotification("Not enough money", 2);
+                        }
                         
                     }
 
                     if (navbar.buySellButton.State == BuySellButtonState.Sell)
                     {
+                        NotificationDisplayer.DisplayNotification("Sold!", 2);
                         Lot selectedLot = navbar.GetSelected();
                         Money += selectedLot.Value;
                         selectedLot.Investment = 0;
@@ -151,10 +161,15 @@ namespace InvestorGame
                     int price = economy.BuildHousePrice;
                     if (Money >= price && selectedLot.State != LotState.House)
                     {
+                        NotificationDisplayer.DisplayNotification("House constructed!", 2);
                         Money -= price;
                         selectedLot.Investment += price;
                         selectedLot.Value += price;
                         selectedLot.State = LotState.House;
+                    }
+                    if(Money < price)
+                    {
+                        NotificationDisplayer.DisplayNotification("Not enough money", 2);
                     }
                     
                 }
@@ -166,10 +181,15 @@ namespace InvestorGame
                     int price = economy.BuildShopPrice;
                     if (Money >= price && selectedLot.State != LotState.Shop)
                     {
+                        NotificationDisplayer.DisplayNotification("Shop constructed!", 2);
                         Money -= price;
                         selectedLot.Investment += price;
                         selectedLot.Value += price;
                         selectedLot.State = LotState.Shop;
+                    }
+                    if (Money < price)
+                    {
+                        NotificationDisplayer.DisplayNotification("Not enough money", 2);
                     }
 
                 }
@@ -181,17 +201,23 @@ namespace InvestorGame
                     int price = economy.BuildOfficePrice;
                     if (Money >= price && selectedLot.State != LotState.Office)
                     {
+                        NotificationDisplayer.DisplayNotification("Office constructed!", 2);
                         Money -= price;
                         selectedLot.Investment += price;
                         selectedLot.Value += price;
                         selectedLot.State = LotState.Office;
                     }
-
+                    if (Money < price)
+                    {
+                        NotificationDisplayer.DisplayNotification("Not enough money", 2);
+                    }
                 }
 
             }
             previousMouseState = currentMouseState;
             navbar.Update();
+
+            NotificationDisplayer.Update(gameTime);
 
             //Update prices
             float timePassed = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -233,7 +259,7 @@ namespace InvestorGame
             //Draw grid
             //levelGenerator.Draw(spriteBatch);
             navbar.Draw(spriteBatch, FontUIBig, SpriteSheet, economy);
-
+            NotificationDisplayer.Draw(spriteBatch, FontNotification);
 
             spriteBatch.End();
             base.Draw(gameTime);
