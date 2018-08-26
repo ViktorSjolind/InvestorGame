@@ -25,7 +25,7 @@ namespace InvestorGame
         MouseState previousMouseState;
         private float TimerDelay = 1;
         private float TimerRemaining;
-        public static int Money = 2000;
+        public static int Money = 17000;
         Texture2D SpriteSheet;
         Economy economy;
         Notification NotificationDisplayer;
@@ -166,7 +166,7 @@ namespace InvestorGame
                         selectedLot.Value += price;
                         selectedLot.State = LotState.House;
                     }
-                    if(Money < price)
+                    else if(Money < price)
                     {
                         NotificationDisplayer.DisplayNotification("Not enough money", 2);
                     }
@@ -186,7 +186,7 @@ namespace InvestorGame
                         selectedLot.Value += price;
                         selectedLot.State = LotState.Shop;
                     }
-                    if (Money < price)
+                    else if (Money < price)
                     {
                         NotificationDisplayer.DisplayNotification("Not enough money", 2);
                     }
@@ -206,7 +206,7 @@ namespace InvestorGame
                         selectedLot.Value += price;
                         selectedLot.State = LotState.Office;
                     }
-                    if (Money < price)
+                    else if (Money < price)
                     {
                         NotificationDisplayer.DisplayNotification("Not enough money", 2);
                     }
