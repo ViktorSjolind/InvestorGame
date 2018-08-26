@@ -84,11 +84,15 @@ namespace InvestorGame.UI
             if (SelectedLot != null)
             {               
                 //Lot metadata
-                spriteBatch.DrawString(bigFont, "Value: " + SelectedLot.Value.ToString("N0"), new Vector2(Position.X + 200, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
-                spriteBatch.DrawString(bigFont, "Investment: " + SelectedLot.Investment.ToString("N0"), new Vector2(Position.X + 350, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(bigFont, "Value: " + SelectedLot.Value.ToString("N0"), new Vector2(Position.X + 160, Position.Y + 25), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(bigFont, "Investment: " + SelectedLot.Investment.ToString("N0"), new Vector2(Position.X + 160, Position.Y + 50), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+
+                spriteBatch.DrawString(bigFont, "Income: " + SelectedLot.Income.ToString("N0"), new Vector2(Position.X + 350, Position.Y + 25), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(bigFont, "Total income: " + SelectedLot.TotalIncome.ToString("N0"), new Vector2(Position.X + 350, Position.Y + 50), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+
                 //Build
-                
-                if(SelectedLot.Owner == Player.Human)
+
+                if (SelectedLot.Owner == Player.Human)
                 {
                     spriteBatch.DrawString(bigFont, "Build: ", new Vector2(Position.X + 600, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
                     BuildHouseButton.Draw(spriteBatch, bigFont, spriteSheet);

@@ -148,6 +148,7 @@ namespace InvestorGame
                         Lot selectedLot = navbar.GetSelected();
                         Money += selectedLot.Value;
                         selectedLot.Investment = 0;
+                        selectedLot.TotalIncome = 0;
                         selectedLot.Owner = Player.AI;
                     }
 

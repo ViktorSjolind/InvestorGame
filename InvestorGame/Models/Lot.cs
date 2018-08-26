@@ -27,6 +27,8 @@ namespace InvestorGame.Models
         
         public int Value;
         public int Investment;
+        public int Income;
+        public int TotalIncome;
 
         public bool Selected;
 
@@ -41,6 +43,8 @@ namespace InvestorGame.Models
             Owner = Player.AI;
             Value = RandomGenerator.GetInteger(500, 1000);
             Investment = 0;
+            Income = 0;
+            TotalIncome = 0;
             Selected = false;
                 
         }
