@@ -104,7 +104,8 @@ namespace InvestorGame.UI
             }            
 
             //Player money
-            spriteBatch.DrawString(bigFont, "Money: " + Game.Money.ToString("N0"), new Vector2(Position.X + 1000, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(bigFont, "Money: " + Game.Money.ToString("N0"), new Vector2(Position.X + 1000, Position.Y + 25), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(bigFont, "Date: " + Game.Month + "/" + Game.Year, new Vector2(Position.X + 1000, Position.Y + 50), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
         }
     }
 }
