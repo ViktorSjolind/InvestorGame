@@ -1,0 +1,19 @@
+﻿Backlog:
+- not done
+* done
+
+-add building upgrades
+-add upgraded building sprites
+-fix menu, more space for each label
+-fix buy sell button alignment of text
+-add factories
+-add supply streams for factories
+-add detailed view for shops, offices, factories. Maybe place upgrades there?
+-add map editor
+-add existing stores and offices to map
+-add menu
+-add game states: menu, paused, playing
+-add saving
+-add highscore saving through REST api
+-add more graphics for map: lakes, trees
+
