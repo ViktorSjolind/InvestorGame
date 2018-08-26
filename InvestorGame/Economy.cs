@@ -25,6 +25,10 @@ namespace InvestorGame
         private int MaxOfficePrice = 20000;
         private int MinOfficePrice = 10000;
 
+        public int BuildHousePrice = 10000;
+        public int BuildShopPrice = 15000;
+        public int BuildOfficePrice = 30000;
+
         private List<Lot> Lots;
 
         public Economy(List<IMapComponents> mapComponents)

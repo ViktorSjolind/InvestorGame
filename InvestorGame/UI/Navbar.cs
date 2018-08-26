@@ -75,7 +75,7 @@ namespace InvestorGame.UI
         }
         
         //UI begins at Y = 620
-        public void Draw(SpriteBatch spriteBatch, SpriteFont bigFont, Texture2D spriteSheet)
+        public void Draw(SpriteBatch spriteBatch, SpriteFont bigFont, Texture2D spriteSheet, Economy economy)
         {
             //Buy sell button
             spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, 1280, 100), Color.White);
@@ -92,8 +92,13 @@ namespace InvestorGame.UI
                 {
                     spriteBatch.DrawString(bigFont, "Build: ", new Vector2(Position.X + 600, Position.Y + 35), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
                     BuildHouseButton.Draw(spriteBatch, bigFont, spriteSheet);
+                    spriteBatch.DrawString(bigFont, "$" + economy.BuildHousePrice.ToString(), new Vector2(Position.X + 660, Position.Y + 74), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+
                     BuildShopButton.Draw(spriteBatch, bigFont, spriteSheet);
+                    spriteBatch.DrawString(bigFont, "$" + economy.BuildShopPrice.ToString(), new Vector2(Position.X + 760, Position.Y + 74), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
+
                     BuildOfficeButton.Draw(spriteBatch, bigFont, spriteSheet);
+                    spriteBatch.DrawString(bigFont, "$" + economy.BuildOfficePrice.ToString(), new Vector2(Position.X + 860, Position.Y + 74), OwnColors.White, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 0);
                 }
                 
             }            

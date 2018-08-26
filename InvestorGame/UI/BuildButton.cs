@@ -50,7 +50,7 @@ namespace InvestorGame.UI
             if (State == BuildButtonState.House)
             {
                 //Highlight button
-                spriteBatch.Draw(TextureWhite, Area, OwnColors.Red);
+                //spriteBatch.Draw(TextureWhite, Area, OwnColors.Red);
                 spriteBatch.Draw(spriteSheet, new Rectangle((int)Position.X, (int)Position.Y, 100, 100), new Rectangle(0, 500, 100, 100), Color.White);
 
             }
@@ -58,7 +58,7 @@ namespace InvestorGame.UI
             if (State == BuildButtonState.Shop)
             {
                 //Highlight button
-                spriteBatch.Draw(TextureWhite, Area, OwnColors.Red);
+                //spriteBatch.Draw(TextureWhite, Area, OwnColors.Red);
                 spriteBatch.Draw(spriteSheet, new Rectangle((int)Position.X, (int)Position.Y, 100, 100), new Rectangle(100, 500, 100, 100), Color.White);
                 
             }
@@ -66,7 +66,7 @@ namespace InvestorGame.UI
             if (State == BuildButtonState.Office)
             {
                 //Highlight button
-                spriteBatch.Draw(TextureWhite, Area, OwnColors.Red);
+                //spriteBatch.Draw(TextureWhite, Area, OwnColors.Red);
                 spriteBatch.Draw(spriteSheet, new Rectangle((int)Position.X, (int)Position.Y, 100, 100), new Rectangle(300, 500, 100, 100), Color.White);
             }
 

@@ -148,7 +148,7 @@ namespace InvestorGame
                 {
                     Debug.WriteLine("build house clicked");
                     Lot selectedLot = navbar.GetSelected();
-                    int price = 1000;
+                    int price = economy.BuildHousePrice;
                     if (Money >= price && selectedLot.State != LotState.House)
                     {
                         Money -= price;
@@ -163,7 +163,7 @@ namespace InvestorGame
                 {
                     Debug.WriteLine("build shop clicked");
                     Lot selectedLot = navbar.GetSelected();
-                    int price = 2000;
+                    int price = economy.BuildShopPrice;
                     if (Money >= price && selectedLot.State != LotState.Shop)
                     {
                         Money -= price;
@@ -178,7 +178,7 @@ namespace InvestorGame
                 {
                     Debug.WriteLine("build office clicked");
                     Lot selectedLot = navbar.GetSelected();
-                    int price = 3000;
+                    int price = economy.BuildOfficePrice;
                     if (Money >= price && selectedLot.State != LotState.Office)
                     {
                         Money -= price;
@@ -232,7 +232,7 @@ namespace InvestorGame
             }
             //Draw grid
             //levelGenerator.Draw(spriteBatch);
-            navbar.Draw(spriteBatch, FontUIBig, SpriteSheet);
+            navbar.Draw(spriteBatch, FontUIBig, SpriteSheet, economy);
 
 
             spriteBatch.End();
