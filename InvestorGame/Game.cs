@@ -133,8 +133,7 @@ namespace InvestorGame
                             Money -= selectedLot.Value;
                             selectedLot.Owner = Player.Human;
                             selectedLot.Investment = selectedLot.Value;
-                        }
-                        if(selectedLot.Value > Money)
+                        }else
                         {
                             NotificationDisplayer.DisplayNotification("Not enough money", 2);
                         }
